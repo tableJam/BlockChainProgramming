@@ -19,7 +19,7 @@ class Wallet(object):
         return self._public_key.to_string().hex()
     @property
     def blockchain_address(self):
-        return self.blockchain_address;
+        return self._blockchain_address
     
     def generate_blockchain_address(self):
         #sha256とripemd160でブロックチェーンアドレスはできるらしい
@@ -77,9 +77,9 @@ transaction = Transaction(myWallet.private_key,myWallet.public_key,myWallet.bloc
 import blockchain
 
 block_chain = blockchain.BlockChain()
-isAdded = block_chain.add_transaction({
+isAdded = block_chain.add_transaction(
     myWallet.blockchain_address,yourWallet.blockchain_address,1.0,myWallet.public_key,transaction.sign()
-})
+)
 if isAdded:
     block_chain.mining()
 

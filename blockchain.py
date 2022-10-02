@@ -19,11 +19,12 @@ def pprint(chains):
     print(f'{"*"*25}')
 
 class BlockChain(object):
-    def __init__(self):
+    def __init__(self,blockchain_address=None,port=None):
         self.transaction = []
         self.chain = []
         self.create_block(0,'init hash')
         self.address = '20001020'
+        self.port = port
     
     def create_block(self,nonce,previous_hash):
         block = util.orderBlock({
@@ -63,7 +64,7 @@ class BlockChain(object):
         if sender_address == BLOCKCHAIN:
             self.transaction.append(transaction)
             return True;
-        if self.verify_transaction(transaction):
+        if self.verify_transaction(sender_public_key,transaction,sign):
             self.transaction.append(transaction)
             return True
         else:
