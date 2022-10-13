@@ -68,23 +68,6 @@ class Transaction(object):
         return sign
     
 
-    
-
-myWallet = Wallet()
-yourWallet = Wallet()
-transaction = Transaction(myWallet.private_key,myWallet.public_key,myWallet.blockchain_address,yourWallet.blockchain_address,1.0)
-
-import blockchain
-
-block_chain = blockchain.BlockChain()
-isAdded = block_chain.add_transaction(
-    myWallet.blockchain_address,yourWallet.blockchain_address,1.0,myWallet.public_key,transaction.sign()
-)
-if isAdded:
-    block_chain.mining()
-
-blockchain.pprint(block_chain.chain)
-
 
 
 

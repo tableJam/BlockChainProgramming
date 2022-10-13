@@ -27,6 +27,8 @@ class BlockChain(object):
         self.port = port
     
     def create_block(self,nonce,previous_hash):
+
+        
         block = util.orderBlock({
             'timestanp':time.time(),
             'transaction':self.transaction,
@@ -51,6 +53,7 @@ class BlockChain(object):
         )
         return verify_key.verify(sign_byte,message)
 
+
     def add_transaction(self,sender_address,resp_address,value,sender_public_key,sign):
         transaction = util.orderBlock(
             {
@@ -69,7 +72,13 @@ class BlockChain(object):
             return True
         else:
             return False
-    
+    def create_transaction(self,sender_address,resp_address,value,sender_public_key,sign):
+        is_transaction = self.add_transaction(sender_address,resp_address,value,sender_public_key,sign)
+        #TODO
+        #sync with other NODE
+        return is_transaction
+
+
     def __valid_proof(self,transaction,previous_hash,nunce):
         guess_block = {
             'transaction':transaction,
@@ -104,6 +113,3 @@ class BlockChain(object):
                 if address == transaction['sender_address']:
                     amount += value
         return amount
-                    
-
-    
